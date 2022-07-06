@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vogon_chat/app_router.dart';
+import 'package:vogon_chat/core/theme/tema_light.dart';
 import 'package:vogon_chat/rotas.dart';
 
 class App extends StatelessWidget {
@@ -13,6 +14,7 @@ class App extends StatelessWidget {
       initialRoute: rotaSplashScreen,
       navigatorKey: AppRouter.chaveDeNavegacao,
       onGenerateRoute: AppRouter.gerarRotas,
+      theme: temaLight(),
     );
   }
 }
