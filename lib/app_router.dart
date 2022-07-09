@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vogon_chat/pages/chat/presentation/chat_view.dart';
 import 'package:vogon_chat/pages/home/presentation/home.dart';
 import 'package:vogon_chat/pages/splash_screen/splash_screen.dart';
 
@@ -26,6 +27,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const HomeView());
       case rotaSplashScreen:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
+      case rotaChat:
+        return MaterialPageRoute(builder: (_) => const ChatView());
       default:
         return MaterialPageRoute(
             builder: (_) => _rotaNaoEncontrada(configuracoes));

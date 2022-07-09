@@ -25,6 +25,46 @@ mixin _$ChatStore on _ChatStoreBase, Store {
     });
   }
 
+  late final _$mensagensAtom =
+      Atom(name: '_ChatStoreBase.mensagens', context: context);
+
+  @override
+  ObservableList<MensagemModel> get mensagens {
+    _$mensagensAtom.reportRead();
+    return super.mensagens;
+  }
+
+  @override
+  set mensagens(ObservableList<MensagemModel> value) {
+    _$mensagensAtom.reportWrite(value, super.mensagens, () {
+      super.mensagens = value;
+    });
+  }
+
+  late final _$scrollControllerAtom =
+      Atom(name: '_ChatStoreBase.scrollController', context: context);
+
+  @override
+  ScrollController get scrollController {
+    _$scrollControllerAtom.reportRead();
+    return super.scrollController;
+  }
+
+  @override
+  set scrollController(ScrollController value) {
+    _$scrollControllerAtom.reportWrite(value, super.scrollController, () {
+      super.scrollController = value;
+    });
+  }
+
+  late final _$initAsyncAction =
+      AsyncAction('_ChatStoreBase.init', context: context);
+
+  @override
+  Future<dynamic> init(GlobalKey<AnimatedListState> key) {
+    return _$initAsyncAction.run(() => super.init(key));
+  }
+
   late final _$enviarMensagemAsyncAction =
       AsyncAction('_ChatStoreBase.enviarMensagem', context: context);
 
@@ -33,10 +73,34 @@ mixin _$ChatStore on _ChatStoreBase, Store {
     return _$enviarMensagemAsyncAction.run(() => super.enviarMensagem());
   }
 
+  late final _$_obterMensagensAsyncAction =
+      AsyncAction('_ChatStoreBase._obterMensagens', context: context);
+
+  @override
+  Future<dynamic> _obterMensagens() {
+    return _$_obterMensagensAsyncAction.run(() => super._obterMensagens());
+  }
+
+  late final _$_ChatStoreBaseActionController =
+      ActionController(name: '_ChatStoreBase', context: context);
+
+  @override
+  bool mensagemEhDoUsuario(String id) {
+    final _$actionInfo = _$_ChatStoreBaseActionController.startAction(
+        name: '_ChatStoreBase.mensagemEhDoUsuario');
+    try {
+      return super.mensagemEhDoUsuario(id);
+    } finally {
+      _$_ChatStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
-mensagemController: ${mensagemController}
+mensagemController: ${mensagemController},
+mensagens: ${mensagens},
+scrollController: ${scrollController}
     ''';
   }
 }

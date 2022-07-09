@@ -25,6 +25,30 @@ mixin _$HomeStore on _HomeStoreBase, Store {
     });
   }
 
+  late final _$dadosContatosAtom =
+      Atom(name: '_HomeStoreBase.dadosContatos', context: context);
+
+  @override
+  List<ContatoModel> get dadosContatos {
+    _$dadosContatosAtom.reportRead();
+    return super.dadosContatos;
+  }
+
+  @override
+  set dadosContatos(List<ContatoModel> value) {
+    _$dadosContatosAtom.reportWrite(value, super.dadosContatos, () {
+      super.dadosContatos = value;
+    });
+  }
+
+  late final _$initAsyncAction =
+      AsyncAction('_HomeStoreBase.init', context: context);
+
+  @override
+  Future<dynamic> init() {
+    return _$initAsyncAction.run(() => super.init());
+  }
+
   late final _$_HomeStoreBaseActionController =
       ActionController(name: '_HomeStoreBase', context: context);
 
@@ -42,7 +66,8 @@ mixin _$HomeStore on _HomeStoreBase, Store {
   @override
   String toString() {
     return '''
-contatos: ${contatos}
+contatos: ${contatos},
+dadosContatos: ${dadosContatos}
     ''';
   }
 }
